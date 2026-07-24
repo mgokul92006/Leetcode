@@ -1,30 +1,30 @@
 class Solution {
 public:
-    bool check(int days,int mid,vector<int>&weights){
-        int c=1,sum=0;
+    bool check(int m,int days,vector<int>&weights){
+        int c=1;
+        int sum=0;
         for(int i=0;i<weights.size();i++){
             sum=sum+weights[i];
-            if(weights[i]>mid)
-            return false;
-            if(sum>mid){
-                c++;
+            if(sum>m){
                 sum=0;
-                sum=sum+weights[i];
+                sum=weights[i];
+                c++;
             }
         }
         return c<=days;
     }
     int shipWithinDays(vector<int>& weights, int days) {
-        int low=1,high=accumulate(weights.begin(),weights.end(),0);
+        int low=*max_element(weights.begin(),weights.end());
+        int high=accumulate(weights.begin(),weights.end(),0);
         int ans=0;
         while(low<=high){
-            int mid=(low+high)/2;
-            if(check(days,mid,weights)){
-                ans=mid;
-                high=mid-1;
+            int m=(low+high)/2;
+            if(check(m,days,weights)){
+                ans=m;
+                high=m-1;
             }
             else
-                low=mid+1;
+                low=m+1;
         }
         return ans;
     }
