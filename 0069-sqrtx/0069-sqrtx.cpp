@@ -4,8 +4,8 @@ public:
         int ans=0;
         int l=1,h=x;
         while(l<=h){
-            long long m=l+(h-l)/2;
-            if(m*m<=x)
+            int m=l+(h-l)/2;
+            if(m<=x/m)
             {
                 ans=m;
                 l=m+1;
