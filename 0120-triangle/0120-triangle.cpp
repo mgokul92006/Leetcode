@@ -3,6 +3,8 @@ public:
     int dpCalculate(vector<vector<int>>&triangle,int i,int j,vector<vector<int>>&dp){
         if(i==triangle.size())
         return 0;
+        if(j==triangle[i].size())
+        return 0;
         if(dp[i][j]!=1e7)
         return dp[i][j];
         int take=1e7,nottake=1e7;
