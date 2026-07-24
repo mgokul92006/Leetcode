@@ -1,22 +1,26 @@
 class Solution {
 public:
-    bool canPartition(vector<int>& nums) {
-        int target=accumulate(nums.begin(),nums.end(),0);
-        if(target%2!=0)
-        return false;
-        target=target/2;
-        vector<vector<unsigned long long>>dp(nums.size()+1,vector<unsigned long long>(target+1,0));
-        for(int i=0;i<=nums.size();i++)
-            dp[i][0]=1;
-        for(int i=1;i<=nums.size();i++){
-            for(int j=0;j<=target;j++){
-                if(j<nums[i-1])
-                    dp[i][j]=dp[i-1][j];
-                else if(j>=nums[i-1]){
-                    dp[i][j]=dp[i-1][j]+dp[i-1][j-nums[i-1]];
-                }
-            }
+    int dpCalculate(vector<int>& nums,int i,int tar,int sum,vector<vector<unsigned long long>>&dp){
+        if(i==nums.size()){
+        if(sum==tar)
+        return 1;
+        return 0;
         }
-        return dp[nums.size()][target];
+        if(sum>tar)
+        return 0;
+        if(dp[i][sum]!=-1)
+        return dp[i][sum];
+        unsigned long long take=0,nottake=0;
+        take=dpCalculate(nums,i+1,tar,sum+nums[i],dp);
+        nottake=dpCalculate(nums,i+1,tar,sum,dp);
+        return dp[i][sum]=take+nottake;
+    }
+    bool canPartition(vector<int>& nums) {
+        int tar=accumulate(nums.begin(),nums.end(),0);
+        if(tar%2!=0)
+        return 0;
+        tar=tar/2;
+        vector<vector<unsigned long long>>dp(nums.size(),vector<unsigned long long>(tar+1,-1));
+        return dpCalculate(nums,0,tar,0,dp);
     }
 };
