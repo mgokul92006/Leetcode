@@ -11,26 +11,39 @@ public:
 
 class Solution {
 public:
-    Node* head=NULL;
-    Node* tail=NULL;
-    void convert(Node* root){
-        if(root==NULL)
-        return;
-        Node* n=new Node(root->val);
-        if(head==NULL){
-            head=n;
-            tail=n;
-        }
-        else{
-            tail->next=n;
-            n->prev=tail;
-            tail=n;
-        }
-        convert(root->child);
-        convert(root->next);
-    }
+    // Node* head=NULL;
+    // Node* tail=NULL;
+    // void convert(Node* root){
+    //     if(root==NULL)
+    //     return;
+    //     Node* n=new Node(root->val);
+    //     if(head==NULL){
+    //         head=n;
+    //         tail=n;
+    //     }
+    //     else{
+    //         tail->next=n;
+    //         n->prev=tail;
+    //         tail=n;
+    //     }
+    //     convert(root->child);
+    //     convert(root->next);
+    // }
+    // Node* flatten(Node* root) {
+    //    convert(root);
+    //    return head;
+    // }
+    Node* prev=NULL;
     Node* flatten(Node* root) {
-       convert(root);
-       return head;
+        if(root==NULL)
+        return root;
+        flatten(root->next);
+        flatten(root->child);
+        root->next=prev;
+        if( prev )
+            prev->prev=root;
+        root->child = NULL;
+        prev=root;
+        return root;
     }
 };
