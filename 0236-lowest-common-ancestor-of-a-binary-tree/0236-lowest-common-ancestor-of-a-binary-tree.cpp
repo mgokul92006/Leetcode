@@ -9,46 +9,23 @@
  */
 class Solution {
 public:
-    vector<TreeNode*>a1;
-    vector<TreeNode*>b1;
-    void path(TreeNode* root,TreeNode* q,vector<TreeNode*>&a){
+    TreeNode* lca(TreeNode* root,TreeNode* p,TreeNode* q){
         if(root==NULL)
-        return;
-        if(root==q){
-            a.push_back(root);
-            a1=a;
-            return;
-        }
-        a.push_back(root);
-        path(root->left,q,a);
-        path(root->right,q,a);
-        a.pop_back();
-    }
-    void path1(TreeNode* root,TreeNode* q,vector<TreeNode*>&c){
-        if(root==NULL)
-        return;
-        if(root==q){
-            c.push_back(root);
-            b1=c;
-            return;
-        }
-        c.push_back(root);
-        path1(root->left,q,c);
-        path1(root->right,q,c);
-        c.pop_back();
+        return NULL;
+        if(root==p)
+        return p;
+        else if(root==q)
+        return q;
+        TreeNode* l=lca(root->left,p,q);
+        TreeNode* r=lca(root->right,p,q);
+        if(l==NULL)
+        return r;
+        else if(r==NULL)
+        return l;
+        else
+        return root;
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        vector<TreeNode*>a,c;
-        path(root,p,a);
-        path1(root,q,c);
-        TreeNode* com;
-        for(int i=0;i<min(a1.size(),b1.size());i++){
-            if(a1[i]==b1[i]){
-                com=a1[i];
-            }
-            else
-            break;
-        }
-        return com;
+        return lca(root,p,q);
     }
 };
