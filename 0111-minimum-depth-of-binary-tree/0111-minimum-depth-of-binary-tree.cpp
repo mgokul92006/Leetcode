@@ -11,20 +11,19 @@
  */
 class Solution {
 public:
-    int inorder(TreeNode* root){
+    int mini(TreeNode* root){
         if(root==NULL)
-        return 0;
-        int l=inorder(root->left);
-        int r=inorder(root->right);
-        if(l==0 && r==0)
+        return INT_MAX;
+        if(root->left==NULL && root->right==NULL)
         return 1;
-        if(l==0)
-        return r+1;
-        if(r==0)
-        return l+1;
+        int l=mini(root->left);
+        int r=mini(root->right);
         return 1+min(l,r);
     }
     int minDepth(TreeNode* root) {
-        return inorder(root);
+        int d=mini(root);
+        if(d==INT_MAX)
+        return 0;
+        return d;
     }
 };
