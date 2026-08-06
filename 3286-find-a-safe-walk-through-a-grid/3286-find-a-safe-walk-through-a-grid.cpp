@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int x[4] = {0, 0, 1, -1};
+    int y[4] = {1, -1, 0, 0};
+    void path(vector<vector<int>>& grid, vector<vector<int>>& dis, int h) {
+        priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>,
+                       greater<tuple<int, int, int>>>
+            q;
+        q.push({grid[0][0],0, 0});
+        while (!q.empty()) {
+            auto [c,i, j] = q.top();
+            q.pop();
+            for (int z = 0; z < 4; z++) {
+                int x1 = i + x[z];
+                int y1 = j + y[z];
+                if (x1 >= 0 && x1 < grid.size() && y1 >= 0 &&
+                    y1 < grid[0].size()) {
+                        if(grid[x1][y1]+c<dis[x1][y1]){
+                            dis[x1][y1]=c+grid[x1][y1];
+                            q.push({dis[x1][y1],x1,y1});
+                        }
+                }
+            }
+        }
+    }
+    bool findSafeWalk(vector<vector<int>>& grid, int health) {
+        vector<vector<int>> dis(grid.size(),
+                                vector<int>(grid[0].size(), INT_MAX));
+        path(grid, dis, health);
+        return dis[grid.size()-1][grid[0].size()-1]<health;
+    }
+};
