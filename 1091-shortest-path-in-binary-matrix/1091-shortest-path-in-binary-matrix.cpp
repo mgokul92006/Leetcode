@@ -16,7 +16,6 @@ public:
                     if(x1==grid.size()-1 && y1==grid[0].size()-1 && grid[x1][y1]!=1)
                     return c+1;
                     else if(vis[x1][y1]>1+c && grid[x1][y1]!=1){
-                        cout<<x1<<" "<<y1<<" "<<c<<endl;
                         vis[x1][y1]=1+c;
                         q.push({x1,y1,vis[x1][y1]});
                     }
