@@ -8,7 +8,7 @@ public:
         vector<vector<int>>vis(n,vector<int>(m,0));
         queue<pair<int,int>>q;
         q.push({0,0});
-        vis[0][0]=0;
+        vis[0][0]=grid[0][0];
         while(!q.empty()){
             auto [i,j]=q.front();
             q.pop();
@@ -27,7 +27,18 @@ public:
     }
     int minimumEffortPath(vector<vector<int>>& heights) {
         int l=0;
-        int h=1000000;
+        int h=0;
+        int mini=0,maxi=0;
+        for(int i=0;i<heights.size();i++){
+            for(int j=0;j<heights[0].size();j++){
+                if(mini>heights[i][j]){
+                    mini=heights[i][j];
+                }
+                if(maxi<heights[i][j])
+                    maxi=heights[i][j];
+            }
+        }
+        h=maxi-mini;
         int ans=0;
         while(l<=h){
             int m=(l+h)/2;
