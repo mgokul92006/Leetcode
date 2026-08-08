@@ -55,7 +55,6 @@ public:
                     a[j]=1;
                 }
             }
-            cout<<endl;
         }
         return ans;
     }
