@@ -37,7 +37,6 @@ public:
         int ans = 1;
         while (l <= h) {
             int m = (l + h) / 2;
-            cout << m << " ";
             if (check(m, dungeon)>0) {
                 ans = m;
                 h = m - 1;
