@@ -2,8 +2,6 @@ class Solution {
 public:
     int MOD=1e9+7;
     int dpCalculate(vector<vector<vector<int>>>&dp,int i,int a,int l,int n){
-        if(i>n)
-        return 0;
         if(i==n)
         return 1;
         if(dp[i][a][l]!=-1)
