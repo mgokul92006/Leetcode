@@ -21,7 +21,6 @@ public:
             for (int i = 0; i < s; i++) {
                 auto [node, mini, maxi] = q.front();
                 q.pop();
-                cout<<mini<<" "<<maxi<<endl;
                 ans = max(ans, abs(maxi - mini));
                 if (node->left) {
                     int a=-1,b=-1;
