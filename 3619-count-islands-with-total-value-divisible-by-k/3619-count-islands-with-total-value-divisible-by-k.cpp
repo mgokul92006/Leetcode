@@ -6,7 +6,7 @@ public:
         queue<pair<int,int>>q;
         q.push({i,j});
         vis[i][j]=1;
-        long long c=grid[i][j];
+        int c=grid[i][j];
         while(!q.empty()){
             int m=q.front().first;
             int n=q.front().second;
@@ -17,11 +17,10 @@ public:
                 if(x1>=0 && x1<grid.size() && y1>=0 && y1<grid[0].size() && grid[x1][y1]!=0 && vis[x1][y1]==0){
                     vis[x1][y1]=1;
                     q.push({x1,y1});
-                    c=c+grid[x1][y1];
+                    c=(c+(grid[x1][y1]%k))%k;
                 }
             }
         }
-        cout<<c<<" ";
         return c%k==0;
     }
     int countIslands(vector<vector<int>>& grid, int k) {
