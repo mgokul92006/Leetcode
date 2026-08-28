@@ -15,8 +15,8 @@ public:
                 q.push({0,node+a,step+1});
                 vis[node+a][0]=1;
             }
-            if(back==0 && node-b>=0 && s.find(node-b)==s.end() && vis[node-a][1]==0){
-                vis[node-a][1]=1;
+            if(back==0 && node-b>=0 && s.find(node-b)==s.end() && vis[node-b][1]==0){
+                vis[node-b][1]=1;
                 q.push({1,node-b,step+1});
             }
         }
