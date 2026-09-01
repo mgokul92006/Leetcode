@@ -7,6 +7,8 @@ public:
             mp[s[r]]++;
             while(mp[s[r]]>1){
                 mp[s[l]]--;
+                if(mp[s[l]]==0)
+                mp.erase(s[l]);
                 l++;
             }
             maxi=max(maxi,r-l+1);
