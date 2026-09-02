@@ -46,6 +46,8 @@ public:
         if(root->val==head->val){
             ListNode* temp1=head;
             validate(root,temp1->next);
+            if(flag)
+            return;
         }
         inorder(root->left,head);
         inorder(root->right,head);
