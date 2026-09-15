@@ -17,9 +17,9 @@ public:
         return dp[n][i]=ans;
     }
     int minDays(int n) { 
-        vector<vector<int>>dp(n+1,vector<int>(448,-1));
         if(n==1e5)
         return 481;
+        vector<vector<int>>dp(n+1,vector<int>(448,-1));
         return dpCalculate(n, 0, 1,dp); 
     }
 };
