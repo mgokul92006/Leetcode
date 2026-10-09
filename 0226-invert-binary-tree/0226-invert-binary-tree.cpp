@@ -11,16 +11,15 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root){
+    void post(TreeNode* root){
         if(root==NULL)
         return;
-        if(root->left !=NULL || root->right!=NULL)
         swap(root->left,root->right);
-        inorder(root->left);
-        inorder(root->right);
+        post(root->left);
+        post(root->right);
     }
     TreeNode* invertTree(TreeNode* root) {
-        inorder(root);
+        post(root);
         return root;
     }
 };
