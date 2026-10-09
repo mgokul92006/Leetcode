@@ -11,18 +11,20 @@
  */
 class Solution {
 public:
-    int inorder(TreeNode* root){
+    int balance(TreeNode* root){
         if(root==NULL)
         return 0;
-        int l=inorder(root->left);
-        int r=inorder(root->right);
-        if(l==-1 || r==-1)
+        int l=balance(root->left);
+        if(l==-1)
+        return -1;
+        int r=balance(root->right);
+        if(r==-1)
         return -1;
         if(abs(l-r)>1)
         return -1;
-        return 1+max(l,r);
+        return max(l,r)+1;
     }
     bool isBalanced(TreeNode* root) {
-        return inorder(root)!=-1;
+        return balance(root)!=-1;
     }
 };
